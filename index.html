@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>De Até</title>
+    <style>
+        p {
+            display: inline;
+        }
+        
+        #container {
+            background-color: #ccc;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            margin: auto;
+            width: 450px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='container'>
+        <p>DE:</p>
+        <input type="date" name="data" id="dataDe">
+        <p>ATÉ:</p>
+        <input type="date" name="data" id="dataAte" onchange="handlerDataAte(this.value)">
+        <input type="button" onclick="consultar()" value="consultar">
+    </div>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', startDOM);
+
+
+    function startDOM() {
+        var hoje = convertHyphenDate(new Date());
+
+        document.getElementById("dataDe").value = hoje;
+        document.getElementById("dataDe").max = hoje;
+        document.getElementById("dataAte").value = hoje;
+        document.getElementById("dataAte").max = hoje;
+    }
+
+    function handlerDataAte(dataAteValue) {
+        if (document.getElementById("dataDe").value > dataAteValue) document.getElementById("dataDe").value = dataAteValue;
+
+        document.getElementById("dataDe").max = dataAteValue;
+    }
+
+    function consultar() {
+        alert("De: " + convertSlashDate(document.getElementById("dataDe").value) + " Até " + convertSlashDate(document.getElementById("dataAte").value));
+    }
+
+    function convertSlashDate(str) {
+        date = str.split("-");
+        return [date[2], date[1], date[0]].join("/");
+    }
+
+    function convertHyphenDate(date) {
+        var dia = date.getDate();
+        var mes = date.getMonth() + 1;
+        var ano = date.getFullYear();
+        if (dia < 10) dia = "0" + dia;
+        if (mes < 10) mes = "0" + mes;
+
+        return ano + "-" + mes + "-" + dia;
+    }
+</script>
+
+</html>
