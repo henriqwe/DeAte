@@ -27,7 +27,7 @@
 <body>
     <div id='container'>
         <p>DE:</p>
-        <input type="date" name="data" id="dataDe">
+        <input type="date" name="data" id="dataDe" onchange="validarDataDe(this.value)">
         <p>ATÉ:</p>
         <input type="date" name="data" id="dataAte" onchange="handlerDataAte(this.value)">
         <input type="button" onclick="consultar()" value="consultar">
@@ -51,6 +51,10 @@
         if (document.getElementById("dataDe").value > dataAteValue) document.getElementById("dataDe").value = dataAteValue;
 
         document.getElementById("dataDe").max = dataAteValue;
+    }
+
+    function validarDataDe(dataDe) {
+        if (dataDe > document.getElementById("dataAte").value) document.getElementById("dataDe").value = document.getElementById("dataAte").value;
     }
 
     function consultar() {
