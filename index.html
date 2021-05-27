@@ -37,9 +37,10 @@
 <script>
     document.addEventListener('DOMContentLoaded', startDOM);
 
+    var hoje = convertHyphenDate(new Date());
 
     function startDOM() {
-        var hoje = convertHyphenDate(new Date());
+
 
         document.getElementById("dataDe").value = hoje;
         document.getElementById("dataDe").max = hoje;
@@ -48,7 +49,8 @@
     }
 
     function handlerDataAte(dataAteValue) {
-        if (document.getElementById("dataDe").value > dataAteValue) document.getElementById("dataDe").value = dataAteValue;
+        if (dataAteValue < document.getElementById("dataDe").value) document.getElementById("dataDe").value = dataAteValue;
+        if (dataAteValue > hoje) document.getElementById("dataAte").value = hoje;
 
         document.getElementById("dataDe").max = dataAteValue;
     }
